@@ -1,0 +1,131 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* display 
+   => inline
+   => block
+   => inline-block
+   => flex
+   => grid
+*/
+/* grid */
+
+.grid-container {
+  width: 400px;
+  height: 500px;
+  margin: 10px auto;
+  border: 1px solid black;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 4px;
+  padding: 3px;
+}
+.items {
+  border: 1px solid blue;
+  box-shadow: 2px 2px 5px blue;
+}
+.header,
+.hero {
+  /* grid-column-start: 1;
+  grid-column-end: 4; */
+  grid-column: 1/4;
+}
+.header img {
+  width: 100%;
+  height: 100px;
+}
+
+.menu {
+  /* grid-row-start: 3;
+  grid-row-end: 6; */
+  grid-row: 3/6;
+}
+.main,
+.banner {
+  /* grid-column-start: 2;
+  grid-column-end: 4; */
+  grid-column: 2/4;
+}
+.extra {
+  /* grid-column-start: 2;
+  grid-column-end: 3; */
+  grid-column: 2/3;
+}
+.image {
+  /* grid-column-start: 3;
+  grid-column-end: 4; */
+
+  grid-column: 3/4;
+}
+
+.p-box {
+  width: 100px;
+  height: 100px;
+  box-shadow: 2px 2px 5px red;
+  margin: auto;
+  transition: all 2s ease;
+}
+.p-box p {
+  transition: all 2s ease;
+}
+.p-box p:hover {
+  color: orangered;
+  background-color: brown;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.p-box:hover{
+    /* transform: rotateY(90deg); */
+    /* transform: translateY(100px); */
+    /* transform: scaleY(2); */
+    /* transform-origin:center ; */
+    /* transform: skew(180deg); */
+}
+
+
+/* animation */
+
+.color-box{
+    width: 150px;
+    height: 150px;
+    border: 2px solid blue;
+    margin: 10px auto;
+    animation: spin 4s ease infinite;
+}
+
+
+@keyframes spin {
+    /* from{
+        background-color: red;
+        rotate: 0deg;
+    }
+    to{
+        background-color: yellow;
+        rotate: 360deg;
+    } */
+
+    0%{
+        background-color: red;
+    }
+    10%{
+        background-color: blue;
+    }
+    25%{
+        background-color: yellow;
+    }
+    50%{
+        background-color: green;
+    }
+    75%{
+        background-color: aqua;
+    }
+    100%{
+        background-color: red;
+    }
+}
+
