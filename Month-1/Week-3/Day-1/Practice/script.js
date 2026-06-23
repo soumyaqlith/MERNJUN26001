@@ -44,7 +44,7 @@ function getV(){
     console.log(d)
 }
 
-// console.log(d)
+console.log(d)
 
 getV()
 
