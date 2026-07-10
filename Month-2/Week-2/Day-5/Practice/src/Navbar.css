@@ -1,0 +1,19 @@
+.nav-container {
+  width: 100vw;
+  height: 70px;
+  box-shadow: 2px 2px 5px black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
+}
+
+.btn {
+  padding: 5px 20px;
+  font-size: 20px;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  background-color: purple;
+  color: white;
+}
