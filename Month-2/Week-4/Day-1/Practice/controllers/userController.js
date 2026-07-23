@@ -1,8 +1,13 @@
 const User = require("../models/userModel");
-const bcrypt =require("bcryptjs")
+const bcrypt = require("bcryptjs");
 
 exports.createUser = async (req, res) => {
   try {
+    // fetch the data from the req.body
+    // validate all the field i.e all field data are coming or not
+    // covert the password to hash format (by bcrypt)
+    // save the user
+    // send the proper view ( data with message)
     const { fullName, age, email, password } = req.body;
 
     if (!fullName || !age || !email || !password) {
@@ -11,14 +16,13 @@ exports.createUser = async (req, res) => {
         .json({ success: false, message: "kindly fill all the field" });
     }
 
-    bcrypt.hash(password, 10,async function (err, hash) {
-      
-        const user = new User({ fullName, age, email, password:hash });
-        await user.save();
-    
-        return res
-          .status(201)
-          .json({ success: true, message: "successfully created" });
+    bcrypt.hash(password, 10, async function (err, hash) {
+      const user = new User({ fullName, age, email, password: hash });
+      await user.save();
+
+      return res
+        .status(201)
+        .json({ success: true, message: "successfully created" });
     });
   } catch (error) {
     return res
