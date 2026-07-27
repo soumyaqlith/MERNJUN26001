@@ -1,5 +1,6 @@
 const User = require("../models/userModel");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 exports.createUser = async (req, res) => {
   try {
@@ -24,6 +25,55 @@ exports.createUser = async (req, res) => {
         .status(201)
         .json({ success: true, message: "successfully created" });
     });
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ success: false, message: "failed to create" });
+  }
+};
+
+exports.loginUser = async (req, res) => {
+  try {
+    // get the user data from req.body
+    // validate the field
+    // validate the new user exist or not (to validate the password we have to use the comapre method)
+    // after send the view
+
+    const { email, password } = req.body;
+    if (!email || !password) {
+      return res
+        .status(500)
+        .json({ success: false, message: "kindly fill all the field" });
+    }
+
+    const existingUser = await User.findOne({ email });
+
+    if (existingUser) {
+      bcrypt.compare(
+        password,
+        existingUser.password,
+        async function (err, result) {
+          if (result === true) {
+            let token = await jwt.sign(
+              {
+                userId: existingUser._id,
+              },
+              process.env.SECRET_KEY,
+              { expiresIn: "1h" },
+            );
+            return res
+              .status(200)
+              .json({ success: true, message: "Login success", token });
+          } else {
+            return res
+              .status(404)
+              .json({ success: false, message: "Invalid Password" });
+          }
+        },
+      );
+    } else {
+      return res.status(404).json({ success: false, message: "Invalid email" });
+    }
   } catch (error) {
     return res
       .status(500)
