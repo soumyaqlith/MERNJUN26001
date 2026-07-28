@@ -18,8 +18,11 @@ exports.protect = async (req, res, next) => {
       return res.status(404).json({ success: false, message: "Invalid token" });
     }
 
-    next()
+    req.user = existingUser;
+    next();
   } catch (error) {
-    return res.status(500).json({success:false,message:"failed to verify token"})
+    return res
+      .status(500)
+      .json({ success: false, message: "failed to verify token" });
   }
 };

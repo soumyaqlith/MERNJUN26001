@@ -17,6 +17,13 @@ exports.createUser = async (req, res) => {
         .json({ success: false, message: "kindly fill all the field" });
     }
 
+    const existinguser = await User.findOne({ email });
+    if (existinguser) {
+      return res
+        .status(400)
+        .json({ success: false, message: "user already exist" });
+    }
+
     bcrypt.hash(password, 10, async function (err, hash) {
       const user = new User({ fullName, age, email, password: hash });
       await user.save();
