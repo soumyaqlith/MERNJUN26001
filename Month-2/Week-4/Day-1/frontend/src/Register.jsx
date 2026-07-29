@@ -20,17 +20,22 @@ function Register() {
   const handleRegister = async () => {
     try {
       const result = await axios.post(
-        "http://localhost:8000/user/create",
+        `${import.meta.env.VITE_BASE_URL}/user/create`,
         formData,
       );
-
-      console.log(result.data);
 
       if (result.data?.success) {
         alert(result.data?.message);
       }
     } catch (error) {
-      alert(error.message);
+      if (error.response) {
+        const data = error.response.data;
+        if (data.message) {
+          alert(data.message);
+        }
+      } else {
+        alert("Unable to connect to the server.");
+      }
     }
   };
   return (

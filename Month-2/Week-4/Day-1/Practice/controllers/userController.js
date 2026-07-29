@@ -13,7 +13,7 @@ exports.createUser = async (req, res) => {
 
     if (!fullName || !age || !email || !password) {
       return res
-        .status(500)
+        .status(400)
         .json({ success: false, message: "kindly fill all the field" });
     }
 
